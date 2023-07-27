@@ -10,7 +10,7 @@
     colour2 : #50717b ;
     colour3 : #3a4042; colour3Hover : #484f51;
     colour4 : #212121;
-    colour5 : #363636; 
+/*    colour5 : #363636; */
 }
 
 .anchorpane {
@@ -29,6 +29,9 @@
     -fx-background-color: colour3;
     -fx-text-fill: colour1;
     -fx-font-size: 30;
+    -fx-display-caret: false;
+    -fx-highlight-fill: null;
+    -fx-highlight-text-fill: null;
 }
 
 .menu-bar, .menu-item, .menu-button, .context-menu {
@@ -40,7 +43,7 @@
 }
 
 .tool-bar {
-    -fx-background-color: colour5;
+    -fx-background-color: colour2;
     -fx-background-radius: 10 10 10 10;
 }
 
