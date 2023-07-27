@@ -14,13 +14,46 @@ import java.util.List;
  */
 public class SudokuSolver {
 
+    private List<Cell> graph;
+    public static final int GRID_SIZE = 9;
     private int[][] grid;
-    public final int GRID_SIZE;
-    static List<Cell> graph;
-
 
     public SudokuSolver() {
-        GRID_SIZE = 9;
+    }
+
+    public int[][] solveGrid(int[][] aGrid) {
+        grid = Arrays.stream(aGrid).map(a -> Arrays.copyOf(a, a.length)).toArray(int[][]::new);
+
+        if (isSolvable()) {
+            initialiseGraph();
+            solve();
+
+            return grid;
+        } else {
+            System.out.println("Puzzle unsolvable");
+
+            return aGrid;
+        }
+    }
+
+    private void initialiseGraph() {
+        graph = new ArrayList<>();
+
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                if (grid[row][col] == 0) {
+                    Cell cell = new Cell(row, col);
+
+                    for (int num = 1; num <= GRID_SIZE; num++) {
+                        if (isSafe(row, col, num)) {
+                            cell.getCandidates().add(num);
+                        }
+                    }
+
+                    graph.add(cell);
+                }
+            }
+        }
     }
 
     private boolean isSafe(int row, int col, int num) {
@@ -53,22 +86,23 @@ public class SudokuSolver {
         return true;
     }
 
-    private void initialiseGraph() {
-        graph = new ArrayList<>();
+    private boolean isSolvable() {
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
-                if (grid[row][col] == 0) {
-                    Cell cell = new Cell(row, col);
-                    
-                    for (int num = 1; num <= GRID_SIZE; num++) {
-                        if (isSafe(row, col, num)) {
-                            cell.getCandidates().add(num);
-                        }
+                int currentCell = grid[row][col];
+
+                if (currentCell != 0) {
+                    grid[row][col] = 0;
+
+                    if (!isSafe(row, col, currentCell)) {
+                        return false;
                     }
-                    graph.add(cell);
+
+                    grid[row][col] = currentCell;
                 }
             }
         }
+        return true;
     }
 
     private boolean solve() {
@@ -86,9 +120,11 @@ public class SudokuSolver {
             if (isSafe(row, col, num)) {
                 grid[row][col] = num;
                 graph.remove(cell);
+
                 if (solve()) {
                     return true;
                 }
+
                 graph.add(cell);
                 Collections.sort(graph);
                 grid[row][col] = 0;
@@ -96,15 +132,6 @@ public class SudokuSolver {
         }
 
         return false;
-    }
-
-    public int[][] solveGrid(int[][] aGrid) {
-        grid = Arrays.stream(aGrid).map(a -> Arrays.copyOf(a, a.length)).toArray(int[][] :: new);
-        initialiseGraph();
-        if (solve()) {
-            return grid;
-        }
-        return aGrid;
     }
 
     private class Cell implements Comparable<Cell> {
@@ -123,15 +150,15 @@ public class SudokuSolver {
             return candidates.size() - otherCell.getCandidates().size();
         }
 
-        private int getRow() {
+        public int getRow() {
             return row;
         }
 
-        private int getCol() {
+        public int getCol() {
             return col;
         }
 
-        private List<Integer> getCandidates() {
+        public List<Integer> getCandidates() {
             return candidates;
         }
     }
