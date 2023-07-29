@@ -40,10 +40,20 @@ public class App extends Application {
         Theme indigo = new Theme("#dbd8e3", "#5c5470", "#352f44", "#2a2438");
         themes.put("Indigo", indigo);
         
-        //
+        // Ocean theme
+        Theme ocean = new Theme("#bbe4e9", "#79c2d0", "#53a8b6", "#5585b5");
+        themes.put("Ocean", ocean);
+        
+        // Violet
+        Theme violet = new Theme("#d5def5", "#8594e4", "#6643b5", "#430f58");
+        themes.put("Violet", violet);
+        
+        // Sunrise
+        Theme sunrise = new Theme("#ef5a5a", "#ffa952", " #ffe79a", "#feffdf");
+        themes.put("Sunrise", sunrise);
         
         
-        
+            
     }
     
     private static Scene createScene(String fxml) throws IOException {
