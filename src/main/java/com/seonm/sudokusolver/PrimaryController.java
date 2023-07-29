@@ -49,8 +49,9 @@ public class PrimaryController implements Initializable {
         ObservableList <String> themeNames = FXCollections.observableArrayList(themes.keySet());
         SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<String>(themeNames);
         valueFactory.setValue("Default");
+        valueFactory.setWrapAround(true);
         themeSpinner.setValueFactory(valueFactory);
-        
+            
         themeSpinner.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> ov, String t, String t1) {

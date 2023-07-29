@@ -52,8 +52,17 @@ public class App extends Application {
         Theme sunrise = new Theme("#ef5a5a", "#ffa952", " #ffe79a", "#feffdf");
         themes.put("Sunrise", sunrise);
         
+        // Evergreen
+        Theme Spruce = new Theme("#b8e1dd", "#3a9188", "#044a42", "#062925");
+        themes.put("Spruce", Spruce);
         
-            
+        // Aloe
+        Theme aloe = new Theme("#d3f6d1", "#a7d7c5", "#74b49b", "#5c8d89");
+        themes.put("Aloe", aloe);
+        
+        // Mint (inverse of Aloe theme)
+        Theme mint = new Theme("#5c8d89", "#74b49b", "#a7d7c5", "#d3f6d1");
+        themes.put("Mint", mint);
     }
     
     private static Scene createScene(String fxml) throws IOException {
