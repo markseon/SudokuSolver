@@ -8,9 +8,8 @@
     /* Them colours*/
     colour1 : #8ecccc ;
     colour2 : #50717b ;
-    colour3 : #3a4042; colour3Hover : #484f51;
+    colour3 : #3a4042; colour3Hover : derive(colour3, 9%);
     colour4 : #212121;
-/*    colour5 : #363636; */
 }
 
 .anchorpane {
@@ -34,11 +33,18 @@
     -fx-highlight-text-fill: null;
 }
 
-.menu-bar, .menu-item, .menu-button, .context-menu {
+.menu-bar, .menu-item, .menu-button, .context-menu, .button,
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button
+{
     -fx-background-color: colour3;
 }
 
-.menu-item .label, .menu-button .label {
+.menu-item .label, .menu-button .label, .label, .button {
+    -fx-text-fill: colour1;
+}
+
+.spinner .text-field {
+    -fx-background-color: colour4;
     -fx-text-fill: colour1;
 }
 
@@ -47,11 +53,18 @@
     -fx-background-radius: 10 10 10 10;
 }
 
-.button {
-  -fx-background-color: colour3;
-  -fx-text-fill: colour1;
+.spinner:focused{
+    -fx-focus-color: colour1;
 }
 
-.button:hover, .cell:hover, .menu-item:hover, .menu-button:hover {
+
+.spinner .increment-arrow-button .increment-arrow, .spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: colour1;
+}
+
+
+.button:hover, .cell:hover, .menu-item:hover, .menu-button:hover,
+.spinner .increment-arrow-button:hover, .spinner .decrement-arrow-button:hover {
     -fx-background-color: colour3Hover;
 }
+

@@ -6,10 +6,17 @@ package com.seonm.sudokusolver;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +31,9 @@ public class PrimaryController implements Initializable {
 
     @FXML
     GridPane parentGrid;
+    @FXML
+    Spinner themeSpinner;
+    Map<String, Theme> themes;
     final int GRID_SIZE;
 
     /**
@@ -31,8 +41,23 @@ public class PrimaryController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //System.out.println("PRIMARY SCENE INITIALISED");
-        //test();
+    }
+    
+    public void initThemes(Map<String, Theme> themes) {
+        this.themes = themes;
+        
+        ObservableList <String> themeNames = FXCollections.observableArrayList(themes.keySet());
+        SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<String>(themeNames);
+        valueFactory.setValue("Default");
+        themeSpinner.setValueFactory(valueFactory);
+        
+        themeSpinner.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                Theme theme = themes.get(themeSpinner.getValue());
+                themeSpinner.getScene().getRoot().setStyle(theme.getCSS());
+            }           
+        });
     }
 
     public PrimaryController() {
@@ -89,6 +114,7 @@ public class PrimaryController implements Initializable {
                 text = text.substring(0, MAX_LENGTH);
                 textField.setText(text);
             }
+            
             char textChar = text.charAt(0);
             if (!Character.isDigit(textChar) || Character.getNumericValue(textChar) == 0) {
                 textField.setText("");

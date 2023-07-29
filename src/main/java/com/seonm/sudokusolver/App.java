@@ -2,12 +2,12 @@ package com.seonm.sudokusolver;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * JavaFX App
@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class App extends Application {
 
     private static Scene scene;
+    private Map<String, Theme> themes;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -23,8 +24,26 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-       
-//        primaryController.test();
+                
+        themes = new HashMap<>();
+        initThemes();
+        
+        primaryController.initThemes(themes);
+    }
+    
+    private void initThemes() {
+        // Default theme
+        Theme defaultTheme = new Theme("#8ecccc", "#50717b", "#3a4042", "#212121");
+        themes.put("Default", defaultTheme);
+        
+        // Indigo theme
+        Theme indigo = new Theme("#dbd8e3", "#5c5470", "#352f44", "#2a2438");
+        themes.put("Indigo", indigo);
+        
+        //
+        
+        
+        
     }
     
     private static Scene createScene(String fxml) throws IOException {
