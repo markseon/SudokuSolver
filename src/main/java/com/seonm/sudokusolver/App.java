@@ -109,10 +109,11 @@ public class App extends Application {
 
     public static int[][] loadGrid() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save grid");
+        fileChooser.setTitle("Load grid");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
-        int[][] grid = new int[9][9];
+        final int GRID_SIZE = 9;
+        int[][] grid = new int[GRID_SIZE][GRID_SIZE];
         
         File gridFile = fileChooser.showOpenDialog(stage);
         if (gridFile != null) {
@@ -121,11 +122,14 @@ public class App extends Application {
             try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
                 String row = reader.readLine();
                 int rowIndex = 0;
-                while(row != null) {
+                
+                while(row != null && rowIndex < GRID_SIZE) {
                     char[] rowArray = row.toCharArray();
-                    for (int i = 0; i < rowArray.length; i++) {
+                    
+                    for (int i = 0; i < rowArray.length && i < GRID_SIZE; i++) {
                         grid[rowIndex][i] = Character.getNumericValue(rowArray[i]);
                     }
+                    
                     rowIndex++;
                     row = reader.readLine();
                 }
