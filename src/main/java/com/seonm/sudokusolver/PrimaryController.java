@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -191,6 +192,17 @@ public class PrimaryController implements Initializable {
         } else {
             // grid not solveable - notify user
         }
+    }
+    
+    @FXML
+    private void saveGrid() {
+        App.saveGrid(readGrid());
+       
+    }
+    
+    @FXML
+    private void loadGrid() {
+        setGrid(App.loadGrid());
     }
     
     
