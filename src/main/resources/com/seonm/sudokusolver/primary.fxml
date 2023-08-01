@@ -24,11 +24,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#loadGrid" text="Load grid" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Options">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Sample Text" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
       <AnchorPane layoutY="26.0" prefHeight="610.0" prefWidth="610.0" stylesheets="@primary.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
