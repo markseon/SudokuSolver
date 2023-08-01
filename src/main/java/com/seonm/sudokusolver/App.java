@@ -3,19 +3,18 @@ package com.seonm.sudokusolver;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * JavaFX App

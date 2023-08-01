@@ -76,8 +76,9 @@ public class PrimaryController implements Initializable {
         return cellValue.isEmpty() ? 0 : Integer.parseInt(cellValue);
     }
     
-    private void setCellValue(int value, int row, int col){
-        getCell(row, col).setText(String.valueOf(value));
+    private void setCellValue(int value, int row, int col){       
+        String valueString = value == 0 ? "" : String.valueOf(value);
+        getCell(row, col).setText(valueString);
     }
     
     private TextField getCell(int row, int col) {
@@ -143,7 +144,7 @@ public class PrimaryController implements Initializable {
         parent.requestFocus();
     }
 
-    private int[][] readGrid() {
+    private int[][] getGrid() {
         int[][] grid = new int[GRID_SIZE][GRID_SIZE];
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
@@ -165,7 +166,7 @@ public class PrimaryController implements Initializable {
     
 
 //    public void test() {
-//        int[][] grid = readGrid();
+//        int[][] grid = getGrid();
 //        for (int[] line : grid) {
 //            System.out.println(Arrays.toString(line));
 //        }
@@ -182,7 +183,7 @@ public class PrimaryController implements Initializable {
     @FXML
     private void solve() {
         SudokuSolver sudokuSolver = new SudokuSolver();
-        int[][] currentGrid = readGrid();
+        int[][] currentGrid = getGrid();
         int[][] solvedGrid = sudokuSolver.solveGrid(currentGrid);
 //        printGrid(currentGrid);
 //        printGrid(solvedGrid);
@@ -196,7 +197,7 @@ public class PrimaryController implements Initializable {
     
     @FXML
     private void saveGrid() {
-        App.saveGrid(readGrid());
+        App.saveGrid(getGrid());
        
     }
     
