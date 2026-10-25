@@ -27,12 +27,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        this.stage = stage;
+        App.stage = stage;
         scene = createScene("primary");
         PrimaryController primaryController = (PrimaryController) scene.getUserData();
         stage.setScene(scene);
         stage.setResizable(false);
         stage.getIcons().add(new Image(App.class.getResourceAsStream("icon.png")));
+        stage.setTitle("Sudoku Solver");
         stage.show();
 
         themes = new HashMap<>();
